@@ -2,7 +2,9 @@ package com.pi.hackerEarth.amazon.gcd;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -34,6 +36,28 @@ public class Main {
 		}
 	}
 
+	private static long phi(long n) {
+		long result = n; // Initialize result as n
+
+		// Consider all prime factors of n and subtract their
+		// multiples from result
+		for (long p = 2; p * p <= n; ++p) {
+			// Check if p is a prime factor.
+			if (n % p == 0) {
+				// If yes, then update n and result
+				while (n % p == 0)
+					n /= p;
+				result -= result / p;
+			}
+		}
+
+		// If n has a prime factor greater than sqrt(n)
+		// (There can be at-most one such prime factor)
+		if (n > 1)
+			result -= result / n;
+		return result;
+	}
+
 	private static long computeCXY(int x, int y, int[] nums,
 			Map<String, Long> memory) {
 
@@ -48,7 +72,7 @@ public class Main {
 				if (isPrime(nums[i - 1])) {
 					computeFX = (2 * nums[i - 1]) - 1;
 				} else {
-					computeFX = computeFX(nums[i - 1], memory);
+					computeFX = computeFX1(nums[i - 1], memory);
 				}
 				result += computeFX;
 				memory.put(key, computeFX);
@@ -56,6 +80,27 @@ public class Main {
 		}
 
 		return result;
+	}
+
+	private static Integer[] findDivisors(int num)
+	{
+		List<Integer> divisors = new ArrayList<Integer>();
+		 for (int i = 2; i <= num / 2; i++) {
+	            if (num % i == 0) {
+	                divisors.add(i);
+	            }
+	        }
+		return (Integer[]) divisors.toArray(new Integer[divisors.size()]);
+	}
+	
+	private static long computeFX1(int i, Map<String, Long> memory) {
+		long result = 1;
+
+		Integer[] findDivisors = findDivisors(i);
+		for (Integer integer : findDivisors) {
+			result+=(phi(integer)/integer);
+		}
+		return result*i;
 	}
 
 	private static boolean isPrime(long n) {
