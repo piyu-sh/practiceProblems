@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class Main {
 
@@ -13,12 +15,18 @@ public class Main {
 		int N = Integer.parseInt(nm[0].trim());
 		int M = Integer.parseInt(nm[1].trim());
 		LinkedList<Integer> adj[] = null;
+		int[] edges=new int[2];
+		Set<Integer> nodes=new HashSet<Integer>();
 		for (int i = 0; i < M; i++) {
 			String[] split = br.readLine().split(" ");
-			adj[Integer.parseInt(split[0])] = new LinkedList<Integer>();
-			adj[Integer.parseInt(split[0])].add(Integer.parseInt(split[1]));
+			edges[0]=Integer.parseInt(split[0]);
+			edges[1]=Integer.parseInt(split[1]);
+			nodes.add(edges[0]);
+			nodes.add(edges[1]);
 		}
-
+		Integer[] arr = null;
+		arr=(Integer[]) nodes.toArray();
+		
 	}
 
 	void initialize(int Arr[], int N) {
