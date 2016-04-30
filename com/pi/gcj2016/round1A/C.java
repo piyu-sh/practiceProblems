@@ -1,11 +1,11 @@
-package com.pi.gcj2016.round1B;
+package com.pi.gcj2016.round1A;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 // couldn't complete on time
-public class Main {
+public class C {
 
 	public static void main(String[] args) throws NumberFormatException,
 			IOException {

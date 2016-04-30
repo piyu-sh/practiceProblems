@@ -3,81 +3,92 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-
-
-//picked from gcj website to see what was the trick to solve
+import java.io.PrintStream;
+//wrong answer because cSmall not set properly, faulty testcase ?6? 287
 public class B {
 
+	public static void main(String[] args) throws NumberFormatException,
+			IOException {
 
+		BufferedReader br = new BufferedReader(new FileReader(new File(
+				"C:\\Users\\kille\\Desktop\\B-small-attempt0.in")));
+		System.setOut(new PrintStream(new File(
+				"C:\\Users\\kille\\Desktop\\B-small-attempt0.out")));
+		int testCases = Integer.parseInt(br.readLine().trim());
+		for (int i = 0; i < testCases; i++) {
+			String[] split = br.readLine().trim().split(" ");
+			char[] coders = split[0].toCharArray();
+			char[] jammers = split[1].toCharArray();
+			boolean isComplementary = false;
+			boolean firstFound = false;
+			char[] cCoders = coders.clone();
+			char[] cJammers = jammers.clone();
+			boolean isCSmall = false;
+			for (int j = 0; j < jammers.length; j++) {
+				if (coders[j] != '?' || jammers[j] != '?') {
 
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        String name = "B";
+					if (!firstFound) {
+						if (Character.isDigit(coders[j])) {
+							if (Character.isDigit(jammers[j])) {
+								if (coders[j] < jammers[j]) {
+									isCSmall = true;
+								}
+							} else {
+								cJammers[j] = coders[j];
+								jammers[j] = coders[j];
+							}
+						} else {
+							cCoders[j] = jammers[j];
+							coders[j] = jammers[j];
+						}
+					}
+					firstFound = true;
+				}
+				if (firstFound) {
+					if (!(Character.isDigit(coders[j]) && Character
+							.isDigit(jammers[j]))) {
+						if (isCSmall) {
+							if (coders[j] == '?') {
+								coders[j] = '9';
+								cCoders[j] = jammers[j];
+							}
+							if (jammers[j] == '?') {
+								jammers[j] = '0';
+								cJammers[j] = coders[j];
+							}
+						} else {
+							if (coders[j] == '?') {
+								coders[j] = '0';
+								cCoders[j] = jammers[j];
+							}
+							if (jammers[j] == '?') {
+								jammers[j] = '9';
+								cJammers[j] = coders[j];
+							}
+						}
+					}
+				}
+			}
 
-        // TODO READER
-        boolean isSmall = true;
-        BufferedReader br;
+			String cCoderString = String.valueOf(cCoders).replace('?', '0');
+			String cJammerString = String.valueOf(cJammers).replace('?', '0');
+			String coderString = String.valueOf(coders).replace('?', '0');
+			String jammerString = String.valueOf(jammers).replace('?', '0');
 
-        //br= new BufferedReader(new FileReader("bum.in"));
-        if(isSmall) br = new BufferedReader(new FileReader(new File(
-				"C:\\Users\\kille\\Desktop\\input.txt")));
-        else br = new BufferedReader(new FileReader(name+"-large.in"));
+			int c = Math.abs(Integer.parseInt(cCoderString)
+					- Integer.parseInt(cJammerString));
+			int d = Math.abs(Integer.parseInt(coderString)
+					- Integer.parseInt(jammerString));
+			if (c < d) {
+				System.out.println("Case #" + (i + 1) + ": " + cCoderString
+						+ " " + cJammerString);
+			} else {
 
-        PrintWriter pw;
-        if(isSmall) pw = new PrintWriter(new File(
-				"C:\\Users\\kille\\Desktop\\output.txt"));
-        else pw = new PrintWriter(name+"-large.txt", "UTF-8");
+				System.out.println("Case #" + (i + 1) + ": " + coderString
+						+ " " + jammerString);
+			}
 
-        int T=Integer.parseInt(br.readLine());
-        for(int i = 0; i < T; i++){
-            int N = Integer.parseInt(br.readLine());
-            int[][] vrst = new int[2*N-1][N];
-            for(int j=0;j<2*N-1;j++){
-                String[] tab =br.readLine().split(" ");
+		}
+	}
 
-                for(int k=0;k<N;k++) {
-                    //System.out.println(""+j+k);
-                    vrst[j][k]=Integer.parseInt(tab[k]);
-                }
-            }
-            String a = solution(vrst,N);
-
-
-            System.out.print("Case #"+(i+1)+": "+a+"\n");
-            pw.write("Case #"+(i+1)+": "+a+"\n");
-
-        }
-        pw.close();
-    }
-
-
-    static String solution(int[][] vrst, int N){
-        boolean[] bool = new boolean[2501];
-        for(int i = 0;i<2*N-1;i++){
-            for(int j = 0;j<N;j++){
-                bool[vrst[i][j]]=!bool[vrst[i][j]];
-            }
-
-        }
-        StringBuilder st = new StringBuilder();
-        for(int i = 0; i<bool.length;i++){
-            if(bool[i]) st.append(i + " ");
-        }
-
-
-
-
-
-        return st.toString();
-    }
-    static boolean isSmaler(int[]one,int[] two){
-        for(int i=0;i<one.length;i++){
-            if(two[i]<=one[i])return false;
-        }
-        return true;
-    }
 }
