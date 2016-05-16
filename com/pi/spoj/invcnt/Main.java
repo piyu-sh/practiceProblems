@@ -1,3 +1,5 @@
+package com.pi.spoj.invcnt;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,9 +18,9 @@ public class Main {
 			for (int j = 0; j < N; j++) {
 				A[j] = Integer.parseInt(br.readLine());
 			}
-//			int temp[] = new int[A.length];
+			// int temp[] = new int[A.length];
 			long count = 0;
-//			count = countByMergeSort(A, temp, 0, A.length - 1);
+			// count = countByMergeSort(A, temp, 0, A.length - 1);
 			// count = countByBubbleSort(A, count);
 			System.out.println(count);
 		}
