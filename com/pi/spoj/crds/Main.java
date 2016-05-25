@@ -1,3 +1,4 @@
+package com.pi.spoj.crds;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
