@@ -73,6 +73,7 @@ public class Main {
 				}
 			}
 			System.out.println(maxStones);
+			// instead take max for each cell
 		}
 	}
 
