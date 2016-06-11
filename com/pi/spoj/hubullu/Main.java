@@ -1,3 +1,4 @@
+package com.pi.spoj.hubullu;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,8 +12,10 @@ public class Main {
 		int testCases = Integer.parseInt(br.readLine().trim());
 		for (int i = 0; i < testCases; i++) {
 			String[] split = br.readLine().trim().split(" ");
-			int N=Integer.parseInt(split[0]);
-			int player=Integer.parseInt(split[1]);
+			int N = Integer.parseInt(split[0]);
+			int player = Integer.parseInt(split[1]);
+			System.out.println(player == 0 ? "Airborne wins."
+					: "Pagfloyd wins.");
 		}
 	}
 
