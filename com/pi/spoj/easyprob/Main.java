@@ -9,24 +9,39 @@ public class Main {
 		getResult(137);
 	}
 
-	private static String getResult(int i) {
-		String result = "2(";
-
-		int a = i;
-		int twoPow = 0;
-		System.out.print("2(");
-		while (twoPow != i) {
-			int twoPower = getTwoPower(a);
-			twoPow += twoPower;
-			System.out.println(twoPower);
-			a=i-twoPow;
-			if(a==i)
+	private static void getResult(int i) {
+//		int a = i;
+//		int twoPow = 0;
+//		System.out.print("2(");
+//		while (twoPow != i) {
+//			int twoPower = getTwoPower(a);
+//			twoPow += Math.pow(2,twoPower);
+//			System.out.println(twoPower);
+//			a=i-twoPow;
+//			if(a==i)
+//			{
+//				System.out.print(")");
+//			}
+//		}
+		
+		if(i>0)
+		{
+			int b=0;
+			while(i-b!=0)
 			{
-				System.out.print(")");
+				System.out.print("2(");
+				int temp = getTwoPower(i);
+				if(temp>2)
+				{
+					getResult(temp);
+				}
+				else
+				{
+					System.out.print(temp+")");
+				}
+				b+=Math.pow(2,temp);
 			}
 		}
-
-		return result;
 	}
 
 	private static int getTwoPower(int a) {
@@ -37,7 +52,7 @@ public class Main {
 		if(i-1>2)
 		{
 			System.out.print("2(");
-			System.out.println(getTwoPower(i-1));
+			System.out.print(getTwoPower(i-1));
 			System.out.print(")");
 		}
 		return i-1;
