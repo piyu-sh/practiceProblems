@@ -1,25 +1,23 @@
+package com.pi.spoj.party;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class Main {
-
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String num;
 		while (!"0 0".equals((num = br.readLine().trim()))) {
-			if("".equals(num))
-			{
+			if ("".equals(num)) {
 				continue;
 			}
 			String[] split = num.split(" ");
 			int money = Integer.parseInt(split[0].trim());
 			int party = Integer.parseInt(split[1].trim());
-			SortedSet<InputData> inputDataSet = new TreeSet<InputData>(
+			TreeSet<InputData> inputDataSet = new TreeSet<InputData>(
 					new MyComp());
 			for (int i = 0; i < party; i++) {
 				String trim[] = br.readLine().trim().split(" ");
@@ -32,11 +30,10 @@ public class Main {
 
 			int sumFee = 0;
 			int sumFun = 0;
-			for (Iterator iterator = inputDataSet.iterator(); iterator
+			for (Iterator iterator = inputDataSet.descendingIterator(); iterator
 					.hasNext();) {
 				InputData inputData = (InputData) iterator.next();
-				if (inputData.fee <= money - sumFee
-						&& inputData.fun <= party - sumFun) {
+				if (inputData.fee <= money - sumFee) {
 					sumFee += inputData.fee;
 					sumFun += inputData.fun;
 				}
@@ -55,5 +52,5 @@ class MyComp implements Comparator<InputData> {
 }
 
 class InputData {
-	Double fee, fun,weight;
+	Double fee, fun, weight;
 }
