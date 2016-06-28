@@ -17,6 +17,7 @@ public class Main {
 			String[] split = num.split(" ");
 			int money = Integer.parseInt(split[0].trim());
 			int party = Integer.parseInt(split[1].trim());
+			int dp[][]=new int[party+1][money+1];
 		}
 	}
 
