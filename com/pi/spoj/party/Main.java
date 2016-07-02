@@ -27,8 +27,7 @@ public class Main {
 				for (int j = 0; j < money + 1; j++) {
 					if (i == 0 || j == 0) {
 						dp[i][j] = 0;
-					}
-					if (fee[i] <= j) {
+					} else if (fee[i - 1] <= j) {
 						dp[i][j] = Math.max(fun[i - 1]
 								+ dp[i - 1][j - fee[i - 1]], dp[i - 1][j]);
 					} else {
